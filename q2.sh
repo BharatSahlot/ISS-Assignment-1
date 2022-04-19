@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file="quotes.txt"
+file=$1
 while read -r line; do
     quote=$(echo $line | grep -oe "^[^\.]*")
     author=$(echo $line | grep -oe "[^~]*$")

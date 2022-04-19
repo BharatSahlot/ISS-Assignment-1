@@ -2,13 +2,9 @@
 
 git: https://github.com/BharatSahlot/ISS-Assignment-1
 
-## Q1 and Q2
+## Q1, Q2 and Q3
 
-q1a.sh, q1a.sh and q2.sh only work with 'quotes.txt'. The file name is hardcoded in the file.
-
-## Q3
-
-Filename is given as a argument. To run do, `q3.sh <file>`
+Filename is given as a argument. To run do, `q<1,2,3>.sh <file>`
 
 ## Q4
 
