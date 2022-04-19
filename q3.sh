@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# TODO: consider only alphabets
-
 file=$1
 
 echo File size: $(wc -c < "$file") bytes
@@ -14,15 +12,19 @@ while read -r line; do
     let i=$i+1
 done < "$file"
 
-words=$(tr ' ' '\n' < $file | sort -u)
+words=$(cat $file | tr ' ' '\n' | awk '!x[$0]++')
 
+found=()
 while read -r word; do
     if [[ -n "${word// /}" ]]; then
-        if echo $word | grep -i -q "^[a-z]*$"; then
-            count=$(cat $file | grep -o $word | wc -w)
-            if (( $count > 1 )); then
-                echo Word: $word - Count of repetition: $count
-            fi
+        # if echo $word | grep -i -q "^[a-z]*$"; then
+            if [[ ! " ${found[*]} " =~ " ${word} " ]]; then
+                found=("${found[@]}" $word)
+                count=$(cat $file | grep -o $word | wc -w)
+                if (( $count > 1 )); then
+                    echo Word: $word - Count of repetition: $count
+                fi
+         #   fi
         fi
     fi
 done <<< $words
